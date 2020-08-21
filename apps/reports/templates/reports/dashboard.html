@@ -3,8 +3,34 @@
 {% block content %}
 <div class="container-fluid">
     <div class="justify-content-center inline">
-        <p class="h5 text-center text-secondary m-5">This will be empty for a while</p>
+        <div class="row">
+            <!-- {% for device in data %}
+            <div class="col-md-4 sm-12">
+                <div class="{{ device.sensor_type|lower}}-card card">
+                    <div class="card-body">
+                      {{ device }}
+                      {{ device.sensor_type }}
+                    </div>
+                  </div>
+            </div>
+            {% endfor %} -->
+            <div class="col-md-4 sm-12">
+                <div class="card bg-success">
+                    <div class="card-body">
+                      <h3>Online devices: 0 </h3>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-4 sm-12">
+                <div class="card bg-danger">
+                    <div class="card-body">
+                      <h3>Offline devices: 0 </h3>
+                    </div>
+                  </div>
+            </div>
+        </div>
     </div>
+    <hr>
     <div class="row justify-content-center">
         <div class="btn-group">
             <a href="https://github.com/jllemus/DjangoApp" type="button" class="btn"><i

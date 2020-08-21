@@ -1,14 +1,102 @@
 body{
     font-family: 'Roboto', sans-serif;
 }
-.navbar {
-    background-color: #003E51;
+
+hr {
+    margin-top: 0;
+    border-top: 1px solid white;
 }
 
 #navbar-title {
     color: white;
 }
+
 .btn {
     background-color: #00B0B9;
+    color: white;
+}
+/* Sidebar Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background-color: #003E51;
+    box-shadow: 0px 0px 10px grey;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+/* Sidebar Styles */
+
+.sidebar-nav {
+    padding: 10px 0 0 20px;
+}
+.sidebar-list ul {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-list li {
+    text-indent: 20px;
+    line-height: 45px;
+    word-spacing: 20px;
+}
+
+.sidebar-list li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar-list li a:hover {
+    text-decoration: none;
+    color: white;
+    background: #006483;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+    #sidebar-wrapper {
+        width: 250px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+.temperature-card {
+    box-shadow: 1px 2px 3px grey;
+    border: none;
+    background-color: rgb(236, 162, 162) !important;
     color: white;
 }

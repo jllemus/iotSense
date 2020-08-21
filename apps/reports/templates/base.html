@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!---Roboto Font google fonts-->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <!---Fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
@@ -22,15 +22,37 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-light">
-            <a class="navbar-brand" href="#" id="navbar-title">
-                <img src="{% static 'reports/images/logo.png' %}" width="45,5" height="37,5" class="d-inline-block align-top" alt="" loading="lazy">
-                IoT Sense
-            </a>
-          </nav>
+
     </header>
-    <main class="container-fluid">
-        {% block content %}{% endblock %}
+    <main>
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <div class="sidebar-nav">
+                    <a class="navbar-brand" href="#" id="navbar-title">
+                        <img src="{% static 'reports/src/logo.png' %}" width="45,5" height="37,5"
+                            class="d-inline-block align-top" alt="" loading="lazy">
+                        IoT Sense
+                    </a>
+                </div>
+                <hr>
+                <div class="sidebar-list">
+                    <ul>
+                        <li>
+                            <a href=""><i class="fas fa-server"></i> Devices</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-chart-bar"></i> Reports</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-info-circle"></i> Account</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </main>
 </body>
 
