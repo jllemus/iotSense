@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!---Roboto Font google fonts-->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet"> -->
+    <!---Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+    <!---Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>{% block title %}{% endblock %} | Mi web personal</title>
+    <link rel="stylesheet" href="{% static 'reports/styles/style.css' %}" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-light">
+            <a class="navbar-brand" href="#" id="navbar-title">
+                <img src="{% static 'reports/images/logo.png' %}" width="45,5" height="37,5" class="d-inline-block align-top" alt="" loading="lazy">
+                IoT Sense
+            </a>
+          </nav>
+    </header>
+    <main class="container-fluid">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.navbar {
+    background-color: #003E51;
+}
+
+#navbar-title {
+    color: white;
+}
+.btn {
+    background-color: #00B0B9;
+    color: white;
+}
