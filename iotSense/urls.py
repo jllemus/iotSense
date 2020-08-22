@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from apps.reports.views import index, dashboard
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
-    path('dashboard', dashboard),
+    path('', include('apps.reports.urls', namespace='reports')),
+    # path('login', login, name="login")
 ]

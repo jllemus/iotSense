@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iotSense</title>
+    <title>Welcome | Iot Sense</title>
     <!---Fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
@@ -13,22 +13,44 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static '/js/ajax.js'%}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'reports/styles/index.css' %}" />
 </head>
 
 <body>
-    <header class="container">
-        <div class="jumbotron">
+    <section class="home-section-1">
+        <div class="container">
             <div class="row">
-                <div class="col">
-                    <h1 class="display-4">IoT Sense</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <div class="col col-sm-12 col-md-7">
+                    <h1> IoT Sense</h1>
+                    <p>Developed by Extreme Technologies, Ing. José Lemus</p>
+                    <hr>
+                    <div class="cta-wrapper">
+                        <a href="{% url 'reports:reports_dashboard' %}" class="btn fancy-btn">Get started</a>
+                    </div>
+                </div>
+                <div class="col col-sm-12 col-md-5">
+                    <div>
+                        <img src="{% static 'reports/src/Principal.png' %}" width="354,75" height="354,75" alt="">
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <!-- <div class="btn-group">
+                    <a href="https://github.com/jllemus/DjangoApp" type="button" class="btn"><i
+                            class="fab fa-github-alt"></i></a>
+                    <button type="button" class="btn"><i class="fab fa-google"></i></button>
+                    <button type="button" class="btn"><i class="fab fa-facebook"></i></button>
+                </div> -->
+            </div>
         </div>
-    </header>
+    </section>
+    <footer class="py-2 bg-dark text-white-50">
+        <div class="container text-center">
+          <small>Copyright &copy;<a class="text-white" href="https://www.linkedin.com/in/jose-luis-lemus-florez-a34943164"> Ing. José Lemus</a></small>
+        </div>
+    </footer>
 </body>
 
 </html>
