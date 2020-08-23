@@ -11,12 +11,22 @@ hr {
     color: white;
 }
 
+.btn-wrapper {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
 .btn {
-    background-color: #00B0B9;
+    background-color: #003E51;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #00455a;
     color: white;
 }
 /* Sidebar Styles */
-
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 1s ease;
@@ -42,7 +52,6 @@ hr {
     padding: 15px;
 }
 /* Sidebar Styles */
-
 .sidebar-nav {
     padding: 10px 0 0 20px;
 }
@@ -68,7 +77,7 @@ hr {
 .sidebar-list li a:hover {
     text-decoration: none;
     color: white;
-    background: #006483;
+    background: #00455a;
 }
 
 @media(min-width:768px) {
@@ -92,11 +101,4 @@ hr {
         position: relative;
         margin-right: 0;
     }
-}
-
-.temperature-card {
-    box-shadow: 1px 2px 3px grey;
-    border: none;
-    background-color: rgb(236, 162, 162) !important;
-    color: white;
 }

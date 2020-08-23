@@ -3,23 +3,22 @@ azul:  003E51
 azul claro:  00B0B9
 verde oscuro:  007A33
 verde:  D0DF00 */
-body{
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
+body {
+    height: 100%;
 }
 section{
     background-color: #00B0B9;
-    min-height: 550px;
-    padding: 80px 0;
+    min-height: 400px;
+    padding: 60px 0;
     color:#fff;
-    flex: 1;
 }
 
-
-footer{
-    flex:1;
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
+
 h1 {
     color:white;
     font-weight: 700;
