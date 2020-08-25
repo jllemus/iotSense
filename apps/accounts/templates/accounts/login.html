@@ -1,9 +1,10 @@
 {% extends 'base.html'%}
 {% load static %}
+{% block title %}Login{% endblock %}
 {% block sidelist %}
 <div class="container-fluid">
-    <div class="row justify-content-center m-5">
-        <h5 class="card-title text-center">Login</h5>
+    <h5 class="card-title text-center">Login</h5>
+    <div class="form row justify-content-center">
         <form role="form" action="{% url 'accounts:user_login' %}" method="POST">
             {% csrf_token %}
             {% for field in form.visible_fields %}
@@ -21,9 +22,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <img src="{% static 'accounts/src/report.png' %}" width="668" height="508"
-class="d-inline-block align-top ml-7" alt="" loading="lazy">
+<div class="row justify-content-center">
+    <img class="img-responsive" src="{% static 'accounts/src/report.png' %}" width="568" height="408" >
 </div>
 
 {% endblock %}

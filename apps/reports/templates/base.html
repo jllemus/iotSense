@@ -16,41 +16,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <title>{% block title %}{% endblock %} | Mi web personal</title>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %} | IoT Sense</title>
     <link rel="stylesheet" href="{% static 'reports/styles/style.css' %}" />
 </head>
 
 <body>
-    <header>
-
-    </header>
-    <main>
-        <div id="wrapper">
-            <div id="sidebar-wrapper">
-                <div class="sidebar-nav">
-                    <a class="navbar-brand" href="#" id="navbar-title">
-                        <img src="{% static 'reports/src/logo.png' %}" width="45,5" height="37,5"
-                            class="d-inline-block align-top" alt="" loading="lazy">
-                        IoT Sense
-                    </a>
-                </div>
-                <hr>
-                {% block sidelist %}{% endblock %}
-                
-                <div class="btn-wrapper text-center">
-                    <div class="btn-group">
-                        <a href="https://github.com/jllemus/DjangoApp" type="button" class="btn"><i
-                                class="fab fa-github-alt"></i></a>
-                        <button type="button" class="btn"><i class="fab fa-google"></i></button>
-                        <button type="button" class="btn"><i class="fab fa-facebook"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div id="page-content-wrapper">
-                {% block content %}{% endblock %}
+    <div class="sidebar">
+        <div class="sidebar-nav">
+            <a class="navbar-brand" href="#" id="navbar-title">
+                <img src="{% static 'reports/src/logo.png' %}" width="45,5" height="37,5"
+                    class="d-inline-block align-top" alt="" loading="lazy">
+                IoT Sense
+            </a>
+        </div>
+        <hr>
+        {% block sidelist %}{% endblock %}
+        <div class="btn-wrapper text-center">
+            <div class="btn-group">
+                <a href="https://github.com/jllemus/DjangoApp" type="button" class="btn"><i
+                        class="fab fa-github-alt"></i></a>
+                <button type="button" class="btn"><i class="fab fa-google"></i></button>
+                <button type="button" class="btn"><i class="fab fa-facebook"></i></button>
             </div>
         </div>
-    </main>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 
 </html>
