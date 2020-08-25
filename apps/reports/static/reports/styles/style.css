@@ -7,6 +7,17 @@ hr {
     border-top: 1px solid white;
 }
 
+.form-group label, h5{
+    color: white;
+    border: none;
+}
+
+.form-group input{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
 #navbar-title {
     color: white;
 }
@@ -26,6 +37,19 @@ hr {
     background-color: #00455a;
     color: white;
 }
+
+#sign-btn {
+    background-color: #007A33 !important;
+    border: none;
+    border-radius: 3px;
+    color: white;
+}
+
+#sign-btn:hover {
+    background-color: #0e8a41 !important;
+    color: white;
+}
+
 /* Sidebar Styles */
 .card{
     box-shadow: 2px 2px 3px grey;

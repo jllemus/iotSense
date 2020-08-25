@@ -35,19 +35,8 @@
                     </a>
                 </div>
                 <hr>
-                <div class="sidebar-list">
-                    <ul>
-                        <li>
-                            <a href=""><i class="fas fa-server"></i> Devices</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fas fa-chart-bar"></i> Reports</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fas fa-info-circle"></i> Account</a>
-                        </li>
-                    </ul>
-                </div>
+                {% block sidelist %}{% endblock %}
+                
                 <div class="btn-wrapper text-center">
                     <div class="btn-group">
                         <a href="https://github.com/jllemus/DjangoApp" type="button" class="btn"><i

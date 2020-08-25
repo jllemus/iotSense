@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.reports.urls', namespace='reports')),
     path('api/', include('apps.reports.api.urls', namespace='rest_framework')),
+    path('accounts/', include('apps.accounts.urls', namespace='accounts')),
 ]

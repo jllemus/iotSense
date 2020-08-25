@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block sidelist %}
+<div class="container-fluid">
+    <div class="row justify-content-center m-5">
+        <h5 class="card-title text-center">Login</h5>
+        <form role="form" action="{% url 'accounts:user_login' %}" method="POST">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+                <label for="">{{ field.label_tag }}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+            <div class="text-center">
+                <button id="sign-btn" type="submit">Sign in</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <img src="{% static 'accounts/src/report.png' %}" width="668" height="508"
+class="d-inline-block align-top ml-7" alt="" loading="lazy">
+</div>
+
+{% endblock %}

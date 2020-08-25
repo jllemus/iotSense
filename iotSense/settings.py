@@ -25,7 +25,7 @@ SECRET_KEY = 'p2m@z8hsjullzax$muc*effyp*mz%f2lqpy29j#dnjmd+ew&f1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.reports',
+    'apps.accounts',
     'rest_framework',
 ]
 
@@ -128,3 +129,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+## This will redirect the home_view template
+## after login 
+LOGIN_REDIRECT_URL = "reports:dashboard"
+
+##This will redirect the template welcome_view 
+## after login out
+LOGOUT_REDIRECT_URL = "accounts:user_login"
+
+## This redirects to user_login template after using 
+## @login_required
+LOGIN_URL = "accounts:user_login"
