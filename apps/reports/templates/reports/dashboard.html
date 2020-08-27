@@ -1,42 +1,5 @@
 {% extends 'base.html'%}
 {% block title %}Dashboard{% endblock %}
-{% block sidelist %}
-  {% if user.is_authenticated and user.is_superuser %}
-    <div class="sidebar-list">
-      <ul>
-          <li>
-              <a href=""><i class="fas fa-city"></i> Companies</a>
-          </li>
-          <li>
-              <a href=""><i class="fas fa-server"></i> Devices</a>
-          </li>
-          <li>
-              <a href="#"><i class="fas fa-chart-bar"></i> Reports</a>
-          </li>
-          <li>
-              <a href="#"><i class="fas fa-info-circle"></i> Account</a>
-          </li>
-          <li>
-            <a href="{% url 'accounts:user_logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </li>
-      </ul>
-    </div>
-  {% else %}
-    <div class="sidebar-list">
-      <ul>
-          <li>
-              <a href=""><i class="fas fa-server"></i> Devices</a>
-          </li>
-          <li>
-              <a href="#"><i class="fas fa-chart-bar"></i> Reports</a>
-          </li>
-          <li>
-              <a href="#"><i class="fas fa-info-circle"></i> Account</a>
-          </li>
-      </ul>
-    </div>
-  {% endif %}
-{% endblock%}
 {% block content %}
 <div class="container-fluid">
     <div class="justify-content-center inline">

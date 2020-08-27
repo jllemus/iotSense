@@ -1,29 +1,80 @@
-{% extends 'base.html'%}
 {% load static %}
-{% block title %}Login{% endblock %}
-{% block sidelist %}
-<div class="container-fluid">
-    <h5 class="card-title text-center">Login</h5>
-    <div class="form row justify-content-center">
-        <form role="form" action="{% url 'accounts:user_login' %}" method="POST">
-            {% csrf_token %}
-            {% for field in form.visible_fields %}
-            <div class="form-group">
-                <label for="">{{ field.label_tag }}</label>
-                {{field}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!---Roboto Font google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <!---Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+    <!---Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <title>Login | IoT Sense</title>
+    <link rel="stylesheet" href="{% static 'reports/styles/style.css' %}" />
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-nav">
+            <a class="navbar-brand" href="{% url 'reports:dashboard' %}" id="navbar-title">
+                <img src="{% static 'reports/src/logo.png' %}" width="45,5" height="37,5"
+                    class="d-inline-block align-top" alt="" loading="lazy">
+                IoT Sense
+            </a>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <h5 class="card-title text-center">Login</h5>
+            <div class="form row justify-content-center">
+                <form role="form" action="{% url 'accounts:user_login' %}" method="POST">
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        <label for="">{{ field.label_tag }}</label>
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    <div class="text-center">
+                        <button id="sign-btn" type="submit">Sign in</button>
+                    </div>
+                </form>
             </div>
-            {% endfor %}
-            <div class="text-center">
-                <button id="sign-btn" type="submit">Sign in</button>
+        </div>
+        <div class="btn-wrapper text-center">
+            <div class="btn-group">
+                <a href="https://github.com/jllemus/DjangoApp" type="button" class="btn"><i
+                        class="fab fa-github-alt"></i></a>
+                <button type="button" class="btn"><i class="fab fa-google"></i></button>
+                <button type="button" class="btn"><i class="fab fa-facebook"></i></button>
             </div>
-        </form>
+        </div>
     </div>
-</div>
-{% endblock %}
+    <div class="content">
+        <div class="row justify-content-center">
+            <img class="img-responsive" src="{% static 'accounts/src/report.png' %}" width="568" height="408">
+        </div>
 
-{% block content %}
-<div class="row justify-content-center">
-    <img class="img-responsive" src="{% static 'accounts/src/report.png' %}" width="568" height="408" >
-</div>
+    </div>
+</body>
 
-{% endblock %}
+</html>

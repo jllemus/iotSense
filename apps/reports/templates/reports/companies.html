@@ -1,3 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Companies{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for company, data in company_data.items %}
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          {{ company }}
+        </div>
+        <div class="card-body">
+          <a href="#">Devices: {{ data.2 }} </a>
+          <div class="container">
+            <div class="row text-center">
+              <div class="col">
+                <a href=""><i class="fas fa-edit"></i>Edit</a>
+                <a href=""><i class="fas fa-edit"></i>Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

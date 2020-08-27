@@ -6,6 +6,10 @@ hr {
     margin-top: 0;
     border-top: 1px solid white;
 }
+a {
+    text-decoration: none;
+}
+
 .sidebar {
     margin: 0;
     padding: 0;
@@ -115,3 +119,4 @@ div.content {
     .btn-wrapper{display:none;}
     div.content {margin-left: 0;}
 }
+
