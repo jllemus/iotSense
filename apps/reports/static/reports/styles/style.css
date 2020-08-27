@@ -54,8 +54,16 @@ a {
     bottom: 10px;
     width: 100%;
 }
-.btn {
+.btn-general {
     background-color: #003E51;
+    color: white;
+}
+.btn-delete{
+    background-color: rgb(245, 81, 81);
+    color: white;
+}
+.btn-edit{
+    background-color: gray;
     color: white;
 }
 .btn:hover {
@@ -84,6 +92,12 @@ a {
 }
 .card{
     box-shadow: 2px 2px 3px grey;
+    width: 100%;
+}
+
+.card-header{
+    background-color: #00B0B9;
+    color: white;
 }
 .thead{
     background-color: #003E51 !important;
@@ -96,7 +110,7 @@ div.content {
     overflow-x: scroll;
     overflow: hidden;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
     .sidebar {
         margin: 0;
         width: 100%;

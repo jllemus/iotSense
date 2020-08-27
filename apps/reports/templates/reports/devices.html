@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Companies{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for device in devices %}
+        <div class="col-md-5 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <p>{{device.device_id}} | {{device.device_name}}</p>
+                </div>
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col">
+                                <div class="form-inline">
+                                    <form action="{% url 'reports:edit_device' action='delete' id=device.id %}"
+                                        method="POST">
+                                        {%csrf_token%}
+                                        <button type="button" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</button>
+                                        <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i> Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div>
+
+</div>
+{% endblock %}

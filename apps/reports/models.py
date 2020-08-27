@@ -14,7 +14,7 @@ class Company(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    company = models.OneToOneField(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
     position = models.CharField(max_length=200, default='None')
 
     def __str__(self):
