@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AddDevice{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        {% if user.is_authenticated %}
+        <form role="form" action="{% url 'reports:add_device' %}" method="POST">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+            <div class="form-group form-add-device">
+                <label for="">{{ field.label_tag }}</label>
+                <div>
+                    {{field}}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Add device</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Device, Profile, Company
+from .forms import AddDeviceForm
 import requests
 # Create your views here.
 
@@ -56,6 +57,26 @@ class Devices(TemplateView):
             return redirect('reports:devices')
         
 
+@method_decorator(login_required, name="get")
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='get')
+class AddDevices(TemplateView):
+    template_name = "reports/add_device.html"
+
+    def get(self, request):
+        user = request.user
+        if user.is_superuser:
+            form = AddDeviceForm()
+            print(form)
+            return render(request, self.template_name, {'form': form})
+        else:
+            raise 404
+    
+    def post(self, request):
+        data = request.POST 
+        form_filled = AddDeviceForm(data)
+        if form_filled.is_valid():
+            form_filled.save()
+            return redirect("reports:devices")
 
 def validation_superuser(user, *model):
     if user.is_superuser:

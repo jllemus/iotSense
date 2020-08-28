@@ -10,6 +10,8 @@ a {
     text-decoration: none;
 }
 
+label{
+}
 .sidebar {
     margin: 0;
     padding: 0;
@@ -90,6 +92,10 @@ a {
     border-radius: 4px;
     outline: none;
 }
+
+.form-add-device label, h5{
+    color: black !important;
+}
 .card{
     box-shadow: 2px 2px 3px grey;
     width: 100%;
@@ -103,6 +109,28 @@ a {
     background-color: #003E51 !important;
     color: white;
 }
+.btn-float-wrapper{
+    margin-top: 20px;
+}
+.btn-float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:grey;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.btn-float:hover{
+    background-color:rgb(100, 100, 100);
+    color: white;
+}
+
+
 div.content {
     margin-left: 250px;
     padding: 50px 10px 10px 10px;
