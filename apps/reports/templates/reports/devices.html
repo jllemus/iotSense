@@ -19,6 +19,7 @@
                                     <form action="{% url 'reports:edit_device' action='delete' id=device.id %}"
                                         method="POST">
                                         {%csrf_token%}
+                                        <button type="button" class="btn btn-view"><i class="fas fa-angle-double-right"></i> View</button>
                                         <button type="button" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</button>
                                         <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i> Delete</button>
                                     </form>
@@ -32,9 +33,12 @@
         </div>
         {% endfor %}
     </div>
+    {% if user.is_superuser %}
     <a href="{% url 'reports:add_device'%}" class="btn-float">
         <i class="fa fa-plus btn-float-wrapper m-10"></i>
     </a>
+    {% endif %}
+
 </div>
 <div>
 

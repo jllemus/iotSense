@@ -11,12 +11,13 @@
           {{ company }}
         </div>
         <div class="card-body">
-          <a href="#">Devices: {{ data.2 }} </a>
+          <a href="{% url 'reports:devices' %}">Devices: {{ data.2 }} </a>
           <div class="container">
             <div class="row text-center">
               <div class="col">
-                <a href=""><i class="fas fa-edit"></i>Edit</a>
-                <a href=""><i class="fas fa-edit"></i>Delete</a>
+                <a href="" class="btn btn-view"><i class="fas fa-angle-double-right"></i>View</a>
+                <a href="" class="btn btn-edit"><i class="fas fa-edit"></i>Edit</a>
+                <a href="" class="btn btn-delete"><i class="fas fa-edit"></i>Delete</a>
               </div>
             </div>
           </div>
