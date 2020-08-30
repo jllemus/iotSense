@@ -3,20 +3,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404, redirect
+from rest_framework.parsers import JSONParser
 from .models import Device, Profile, Company
-from .common import DataDecodification
 from .forms import AddDeviceForm
-import requests
+
 # Create your views here.
 
 
 
 
 def index(request):
-    data = {'mode': '2', 'device_name': 'Beacon', 'hw_version': '5.4', 'data': '0201', 'device_id': 'D09469', '_raw': {'rssi': '-132.00', 'data': '0201', 'lng': 'null', 'ack': 'false', 'duplicate': 'null', 'avgSnr': 'null', 'longPolling': 'false', 'snr': '6.78',
-                                                                                                                   'station': '677F', 'seqNumber': '547', 'time': '1598743023', 'device': 'D09469', 'lat': 'null'}, 'state': 'moved', 'fw_version': '1.7', 'timestamp': 1598743023, 'lng': 'null', 'lat': 'null', 'status_battery': 'MEDIUM', 'status_voltage': '2.719'}
-    decoded_data = DataDecodification(data).data_decode()
-    print(decoded_data)
     return render(request, 'reports/index.html')
 
 # @method_decorator(login_required) Used on class based views

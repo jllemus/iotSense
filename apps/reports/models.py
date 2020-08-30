@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -40,7 +41,10 @@ class Device(models.Model):
         return title
 
 class DeviceInfo(models.Model):
-    device_data = models.CharField(max_length=1000)
-    device = models.OneToOneField(Device, on_delete=models.CASCADE)
+    temperature = models.CharField(max_length=200, default='', blank=True, null=True)
+    humidity = models.CharField(max_length=200, default='', blank=True, null=True)
+    state = models.CharField(max_length=200, default='', blank=True, null=True)
+    timestamp = models.DateTimeField(default=datetime.datetime.now)
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
 
 

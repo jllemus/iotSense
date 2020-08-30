@@ -63,7 +63,10 @@
 
 # TYPE DICT
 # LEN 13
-from apps.reports.models import Device
+from apps.reports.models import Device, DeviceInfo
+import datetime
+import json
+
 
 class DataDecodification:
     def __init__(self, data):
@@ -78,10 +81,10 @@ class DataDecodification:
     def unabiz_decode(self, data):
         decoded_data = {}
         if len(data) == 13:
-            decoded_data['device_brand'] = 'unabiz'
-            decoded_data['device_name'] = data['device_name']
-            decoded_data['device_id'] = Device.objects.get(
+            decoded_data["device_brand"] = 'unabiz'
+            decoded_data["device_name"] = data['device_name']
+            decoded_data["device_id"] = Device.objects.get(
                 device_id=data['device_id'])
-        return decoded_data
-
-
+            decoded_data["device_state"] = data['state']
+            device_info = DeviceInfo(state=decoded_data['device_state'], timestamp=datetime.datetime.now(), device=decoded_data['device_id'])
+        return device_info
