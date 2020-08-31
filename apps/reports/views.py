@@ -8,10 +8,6 @@ from .models import Device, Profile, Company, DeviceInfo
 from .forms import AddDeviceForm
 
 # Create your views here.
-
-
-
-
 def index(request):
     return render(request, 'reports/index.html')
 
@@ -19,23 +15,13 @@ def index(request):
 @login_required
 def dashboard(request):
     user = request.user
-    if user.is_superuser:
-        devices_info = DeviceInfo.objects.all()
-        devices = Device.objects.all()
-    else:
-        devices_info = []
-        company = Company.objects.get(id=user.id)
-        devices = Device.objects.filter(company=company)
-        for device in devices:
-            devices_info.append(DeviceInfo.objects.filter(device=device))
+    devices, devices_info= validation_superuser(user)
     return render(request, 'reports/dashboard.html', {'devices': devices, 'device_number': devices.count(), 'devices_info': devices_info})
-
 
 @method_decorator(login_required, name='get')
 # @method_decorator(user_passes_test(lambda u: u.is_superuser), name='get')
 class Companies(TemplateView):
     template_name = "reports/companies.html"
-
     def get(self, request):
         try:
             company_data = {}
@@ -50,14 +36,13 @@ class Companies(TemplateView):
         except:
             return HttpResponse('<h1> You don\'t have permission to access this page </h1>', status=400)
 
-
 @method_decorator(login_required, name='get')
 class Devices(TemplateView):
     template_name = 'reports/devices.html'
 
     def get(self, request):
         user = request.user
-        devices = validation_superuser(user, Device, Company)
+        devices, _ = validation_superuser(user)
         return render(request, self.template_name, {'devices': devices})
 
     def post(self, request, action, id):
@@ -67,7 +52,6 @@ class Devices(TemplateView):
             obj.delete()
             return redirect('reports:devices')
         
-
 @method_decorator(login_required, name="get")
 @method_decorator(user_passes_test(lambda u: u.is_superuser), name='get')
 class AddDevices(TemplateView):
@@ -89,10 +73,14 @@ class AddDevices(TemplateView):
             form_filled.save()
             return redirect("reports:devices")
 
-def validation_superuser(user, *model):
+def validation_superuser(user):
     if user.is_superuser:
-        devices = model[0].objects.all()
+        devices = Device.objects.all()
+        devices_info = DeviceInfo.objects.all()
     else:
-        company = model[1].objects.get(id=user.id)
-        devices = model[0].objects.filter(company=company)
-    return devices
+        devices_info = []
+        company = Company.objects.get(id=user.id)
+        devices = Device.objects.filter(company=company)
+        for device in devices:
+            devices_info.append(DeviceInfo.objects.filter(device=device))
+    return devices, devices_info
