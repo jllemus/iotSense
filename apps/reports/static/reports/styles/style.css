@@ -7,6 +7,10 @@ hr {
     margin-top: 0;
     border-top: 1px solid white;
 }
+
+h5{
+    color: white;
+}
 a {
     text-decoration: none;
 }
@@ -90,7 +94,7 @@ label{
     color: white;
 }
 .form-group{padding-left: 20px;}
-.form-group label, h5{
+.form-group label{
     color: white;
     border: none;
 }
@@ -100,7 +104,7 @@ label{
     outline: none;
 }
 
-.form-add-device label, h5{
+.form-add-device label{
     color: black !important;
 }
 .card{
@@ -156,7 +160,7 @@ div.content {
     .sidebar-list ul {
         width:100%;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: wrap-reverse;
     }
     .sidebar-list li {
         text-align: center;

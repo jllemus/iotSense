@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework.parsers import JSONParser
-from .models import Device, Profile, Company
+from .models import Device, Profile, Company, DeviceInfo
 from .forms import AddDeviceForm
 
 # Create your views here.
@@ -19,8 +19,16 @@ def index(request):
 @login_required
 def dashboard(request):
     user = request.user
-    data = validation_superuser(user, Device, Company)
-    return render(request, 'reports/dashboard.html', {'devices': data, 'device_number': data.count()})
+    if user.is_superuser:
+        devices_info = DeviceInfo.objects.all()
+        devices = Device.objects.all()
+    else:
+        devices_info = []
+        company = Company.objects.get(id=user.id)
+        devices = Device.objects.filter(company=company)
+        for device in devices:
+            devices_info.append(DeviceInfo.objects.filter(device=device))
+    return render(request, 'reports/dashboard.html', {'devices': devices, 'device_number': devices.count(), 'devices_info': devices_info})
 
 
 @method_decorator(login_required, name='get')
