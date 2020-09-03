@@ -58,6 +58,9 @@ label{
     background: #00455a;
     cursor: pointer;
 }
+.btn{
+    margin: 5px;
+}
 .btn-wrapper {
     position: absolute;
     bottom: 10px;
@@ -110,11 +113,25 @@ label{
 .card{
     box-shadow: 2px 2px 3px grey;
     width: 100%;
+    color: grey;
+    border-top: 4px solid #D0DF00;
 }
-
 .card-header{
-    background-color: #00B0B9;
-    color: white;
+    margin-top:5px;
+    text-align: center;
+    background-color: white;
+}
+.card-body{
+    align-items: center;
+}
+.card-online{
+    border-top: 4px solid #D0DF00;
+}
+.card-offline{
+    border-top: 4px solid rgb(252, 94, 94);
+}
+.card-total{
+    border-top: 4px solid #00B0B9;
 }
 .thead{
     background-color: #003E51 !important;

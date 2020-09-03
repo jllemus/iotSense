@@ -8,23 +8,31 @@
     <div class="col-md-5 col-sm-6 col-xs-12">
       <div class="card">
         <div class="card-header">
-          {{ company }}
+          <h6>{{ company }}</h6>
         </div>
         <div class="card-body">
-          <a href="{% url 'reports:devices' %}">Devices: {{ data.2 }} </a>
           <div class="container">
-            <div class="row text-center">
-              <div class="col">
-                <a href="" class="btn btn-view"><i class="fas fa-angle-double-right"></i>View</a>
-                <a href="" class="btn btn-edit"><i class="fas fa-edit"></i>Edit</a>
-                <a href="" class="btn btn-delete"><i class="fas fa-edit"></i>Delete</a>
-              </div>
+            <div class="row">
+              <a href="{% url 'reports:devices' %}">Devices: {{ data.1 }} </a>
+            </div>
+            <div class="row justify-content-center">
+              <a href="" class="btn btn-view col-3" method="POST"><i class="fas fa-angle-double-right"></i>View</a>
+              <a href="" class="btn btn-edit col-3"><i class="fas fa-edit"></i>Edit</a>
+              <form action="{% url 'reports:edit_company' action='delete' id=data.0.id %}" method="POST" >
+                {%csrf_token%}
+                <button type="submit" class="btn btn-delete"><i class="fas fa-trash col-3"></i> Delete</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    {% endfor %}
   </div>
+  {% endfor %}
 </div>
+</div>
+{% if user.is_superuser %}
+<a href="{% url 'reports:add_company'%}" class="btn-float">
+  <i class="fa fa-plus btn-float-wrapper m-10"></i>
+</a>
+{% endif %}
 {% endblock %}
