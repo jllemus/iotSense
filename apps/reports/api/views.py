@@ -9,8 +9,11 @@ def welcome(request):
     if request.method == 'POST':
         data = request.data
         decoded_data = DataDecodification(data).data_decode()
-        decoded_data.save()        
-        return Response(data)
+        if decoded_data != None:
+            decoded_data.save()        
+            return Response(data)
+        else: 
+            pass
     else:
         content = {"message": "Welcome to the BookStore!"}
         return JsonResponse(content)

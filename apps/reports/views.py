@@ -48,6 +48,7 @@ class Devices(TemplateView):
     def get(self, request):
         user = request.user
         devices, _ = validation_superuser(user)
+        devices_info = DeviceInfo.objects.filter()
         return render(request, self.template_name, {'devices': devices})
 
     def post(self, request, action, id):
@@ -83,8 +84,8 @@ def validation_superuser(user):
         devices_info = DeviceInfo.objects.all()
     else:
         devices_info = []
-        company = Company.objects.get(id=user.id)
-        devices = Device.objects.filter(company=company)
+        profile = Profile.objects.get(user=user)
+        devices = Device.objects.filter(company=profile.company)
         for device in devices:
             devices_info.append(DeviceInfo.objects.filter(device=device))
     return devices, devices_info

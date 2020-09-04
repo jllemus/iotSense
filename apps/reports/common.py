@@ -74,17 +74,35 @@ class DataDecodification:
 
     def data_decode(self):
         '''Checks which type of device is sendind data'''
-        if len(self.data) == 13 or len(self.data) == 7:
-            decoded_data = self.unabiz_decode(self.data)
-        return decoded_data
+        try:
+            device_name = self.data['device_name']
+            if device_name == 'Sense' or device_name == 'Beacon':
+                decoded_data = self.unabiz_decode(self.data)
+                return decoded_data
+        except:
+            pass
 
     def unabiz_decode(self, data):
         decoded_data = {}
-        if len(data) == 13:
+        device_name = data['device_name']
+        if device_name == 'Beacon':
             decoded_data["device_brand"] = 'unabiz'
             decoded_data["device_name"] = data['device_name']
             decoded_data["device_id"] = Device.objects.get(
                 device_id=data['device_id'])
             decoded_data["device_state"] = data['state']
-            device_info = DeviceInfo(state=decoded_data['device_state'], timestamp=datetime.datetime.now(), device=decoded_data['device_id'])
+            decoded_data["temperature"] = 'N/A'
+            decoded_data["humidity"] = 'N/A'
+            device_info = DeviceInfo(state=decoded_data['device_state'], timestamp=datetime.datetime.now(
+            ), device=decoded_data['device_id'])
+        elif device_name == 'Sense':
+            decoded_data["device_brand"] = 'unabiz'
+            decoded_data["device_name"] = data['device_name']
+            decoded_data["device_id"] = Device.objects.get(
+                device_id=data['device_id'])
+            decoded_data["temperature"] = data['temperature']
+            decoded_data["humidity"] = data['humidity']
+            decoded_data["device_state"] = 'N/A'
+            device_info = DeviceInfo(humidity=decoded_data['humidity'], temperature=decoded_data['temperature'],
+                                     timestamp=datetime.datetime.now(), device=decoded_data['device_id'])
         return device_info

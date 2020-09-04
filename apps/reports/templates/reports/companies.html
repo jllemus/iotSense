@@ -18,7 +18,7 @@
             <div class="row justify-content-center">
               <a href="" class="btn btn-view col-3" method="POST"><i class="fas fa-angle-double-right"></i>View</a>
               <a href="" class="btn btn-edit col-3"><i class="fas fa-edit"></i>Edit</a>
-              <form action="{% url 'reports:edit_company' action='delete' id=data.0.id %}" method="POST" >
+              <form action="{% url 'reports:edit_company' action='delete' id=data.0.id %}" method="POST">
                 {%csrf_token%}
                 <button type="submit" class="btn btn-delete"><i class="fas fa-trash col-3"></i> Delete</button>
             </div>
@@ -26,9 +26,8 @@
         </div>
       </div>
     </div>
-  </div>
   {% endfor %}
-</div>
+  </div>
 </div>
 {% if user.is_superuser %}
 <a href="{% url 'reports:add_company'%}" class="btn-float">

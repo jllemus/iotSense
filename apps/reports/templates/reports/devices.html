@@ -5,38 +5,35 @@
 <div class="container">
     <div class="row">
         {% for device in devices %}
-        <div class="col-md-5 col-sm-6 col-xs-12">
-            <div class="card">
-                <div class="card-header">
-                    {{device.device_id}} | {{device.device_name}}
-                </div>
-                <div class="card-body">
-                    {% if user.is_authenticated %}
-                    <div class="container">
-                        <div class="row">
-                            <button type="button" class="btn btn-view"><i class="fas fa-angle-double-right"></i>
-                                View</button>
-                            <button type="button" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</button>
-                            <form action="{% url 'reports:edit_device' action='delete' id=device.id %}" method="POST">
-                                {%csrf_token%}
-                                <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i>
-                                    Delete</button>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        {{device.device_id}} | {{device.device_name}}
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <button type="button" class="btn btn-view"><i class="fas fa-angle-double-right"></i>
+                                    View</button>
+                                {% if user.is_authenticated %}
+                                    <button type="button" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</button>
+                                    <form action="{% url 'reports:edit_device' action='delete' id=device.id %}" method="POST">
+                                        {%csrf_token%}
+                                        <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i>
+                                            Delete</button>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-                {% endif %}
             </div>
-        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% if user.is_superuser %}
 <a href="{% url 'reports:add_device'%}" class="btn-float">
     <i class="fa fa-plus btn-float-wrapper m-10"></i>
 </a>
 {% endif %}
-</div>
-<div>
-
 </div>
 {% endblock %}
