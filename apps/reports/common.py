@@ -80,7 +80,7 @@ class DataDecodification:
                 decoded_data = self.unabiz_decode(self.data)
                 return decoded_data
         except:
-            pass
+            return None
 
     def unabiz_decode(self, data):
         decoded_data = {}

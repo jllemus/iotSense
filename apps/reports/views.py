@@ -17,7 +17,7 @@ def index(request):
 def dashboard(request):
     user = request.user
     devices, devices_info = validation_superuser(user)
-    return render(request, 'reports/dashboard.html', {'devices': devices, 'device_number': devices.count(), 'devices_info': devices_info})
+    return render(request, 'reports/dashboard.html', {'devices': devices, 'device_number': devices.count(), 'devices_info': devices_info.order_by('-timestamp')})
 
 
 @method_decorator(login_required, name='get')

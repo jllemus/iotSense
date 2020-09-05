@@ -13,7 +13,7 @@ def welcome(request):
             decoded_data.save()        
             return Response(data)
         else: 
-            pass
+            return Response(status=200)
     else:
         content = {"message": "Welcome to the BookStore!"}
         return JsonResponse(content)
