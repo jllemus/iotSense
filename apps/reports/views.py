@@ -3,11 +3,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404, redirect
-from rest_framework.parsers import JSONParser
 from .models import Device, Profile, Company, DeviceInfo
 from .forms import AddDeviceForm
-
-# Create your views here.
+from django.utils import timezone
 
 
 def index(request):
@@ -20,10 +18,22 @@ def dashboard(request):
     devices, devices_info = validation_superuser(user)
     try:
         devices_info = devices_info.order_by('-timestamp')
+        online_devices, offline_devices = active_devices(devices)
+        data = {
+            'devices': devices,
+            'devices_info': devices_info,
+            'online': online_devices,
+            'offline': offline_devices
+        }
     except:
-        devices_info = devices_info
+        data = {
+            'devices': devices,
+            'devices_info': devices_info,
+            'online': 0,
+            'offline': 0
+        }
 
-    return render(request, 'reports/dashboard.html', {'devices': devices, 'device_number': devices.count(), 'devices_info': devices_info})
+    return render(request, 'reports/dashboard.html', data)
 
 
 @method_decorator(login_required, name='get')
@@ -47,7 +57,6 @@ class Companies(TemplateView):
         delete(Company, action, id)
         return redirect('reports:companies')
 
-
 @method_decorator(login_required, name='get')
 class Devices(TemplateView):
     template_name = 'reports/devices.html'
@@ -58,7 +67,8 @@ class Devices(TemplateView):
         devices, _ = validation_superuser(user)
         try:
             for device in devices:
-                device_info = DeviceInfo.objects.filter(device=device).order_by('-timestamp')
+                device_info = DeviceInfo.objects.filter(
+                    device=device).order_by('-timestamp')
                 devices_dict[device.device_name] = [device, device_info]
         except:
             devices_dict = {}
@@ -67,7 +77,6 @@ class Devices(TemplateView):
     def post(self, request, action, id):
         delete(Device, action, id)
         return redirect('reports:devices')
-
 
 @method_decorator(login_required, name="get")
 @method_decorator(user_passes_test(lambda u: u.is_superuser), name='get')
@@ -89,7 +98,6 @@ class AddDevices(TemplateView):
             form_filled.save()
             return redirect("reports:devices")
 
-
 def validation_superuser(user):
     if user.is_superuser:
         devices = Device.objects.all()
@@ -102,8 +110,23 @@ def validation_superuser(user):
             devices_info.append(DeviceInfo.objects.filter(device=device))
     return devices, devices_info
 
-
 def delete(model, action, id):
     if action == 'delete':
         item = get_object_or_404(model, pk=int(id))
         item.delete()
+
+def active_devices(devices):
+    online_devices = 0
+    offline_devices = 0
+    for device in devices:
+        last_device_info = DeviceInfo.objects.filter(device=device).last()
+        if last_device_info != None:
+            time_difference = timezone.now() - last_device_info.timestamp
+            seconds_in_day = 24 * 60 * 60
+            time_difference = divmod(
+                time_difference.days * seconds_in_day + time_difference.seconds, 60)
+            if time_difference[0] < 10:
+                online_devices += 1
+            else:
+                offline_devices += 1
+    return online_devices, offline_devices

@@ -1,57 +1,64 @@
 {% extends 'base.html'%}
 {% block title %}Dashboard{% endblock %}
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item breadcrumb-item-active">Home</a></li>
+  </ol>
+</nav>
+{% endblock %}
 {% block content %}
 <div class="container-fluid justify-content-center">
-    <div class="row">
-      <div class="col-md-4 col-sm-6 col-xs-12 p-1">
-        <div class="card" id="card-online">
-          <div class="card-body">
-            <div class="container">
-              <div class="row">
-                <h3>Online devices: 0 </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-12 p-1">
-        <div class="card" id="card-offline">
-          <div class="card-body">
-            <div class="container">
-              <div class="row">
-                <h3>Offline devices: 0 </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 sm-12 p-1">
-        <div class="card" id="card-total">
-          <div class="card-body">
-            <div class="container">
-              <div class="row">
-                <h3>Total devices: {{device_number}} </h3>
-              </div>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 p-1">
+      <div class="card" id="card-online">
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <h3>Online devices: {{ online }} </h3>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row justify-content-md-center">
-      <table class="table table-responsive table-hover col-sm-12 col-md-11">
-        <thead class="thead">
-          <tr>
-            <th scope="col">Device id</th>
-            <th scope="col">Device name</th>
-            <th scope="col">Company</th>
-            <th scope="col">Time</th>
-            <th scope="col">State</th>
-            <th scope="col">Temperature</th>
-            <th scope="col">Humidity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% if user.is_superuser %}
+    <div class="col-md-4 col-sm-6 col-xs-12 p-1">
+      <div class="card" id="card-offline">
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <h3>Offline devices: {{ offline }} </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 sm-12 p-1">
+      <div class="card" id="card-total">
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <h3>Total devices: {{devices.count}} </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <table class="table table-responsive table-hover col-sm-12 col-md-11">
+      <thead class="thead">
+        <tr>
+          <th scope="col">Device id</th>
+          <th scope="col">Device name</th>
+          <th scope="col">Company</th>
+          <th scope="col">Time</th>
+          <th scope="col">State</th>
+          <th scope="col">Temperature</th>
+          <th scope="col">Humidity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if user.is_superuser %}
           {% for data in devices_info %}
           <tr>
             <th scope="row">{{data.device.device_id}}</th>
@@ -63,28 +70,32 @@
             <td>{{data.humidity}}</td>
           </tr>
           {% endfor %}
+        {% else %}
+          {% if devices_info %}
+            {% for queryset in devices_info%}
+              {% for data in queryset %}
+              <tr>
+                <th scope="row">{{data.device.device_id}}</th>
+                <td>{{data.device.device_name}}</td>
+                <td>{{data.device.company}}</td>
+                <td>{{data.timestamp}}</td>
+                <td>{{data.state}}</td>
+                <td>{{data.temperature}}</td>
+                <td>{{data.humidity}}</td>
+              </tr>
+              {% endfor %}
+            {% endfor%}
           {% else %}
-          {% for queryset in devices_info%}
-          {% for data in queryset %}
-          <tr>
-            <th scope="row">{{data.device.device_id}}</th>
-            <td>{{data.device.device_name}}</td>
-            <td>{{data.device.company}}</td>
-            <td>{{data.timestamp}}</td>
-            <td>{{data.state}}</td>
-            <td>{{data.temperature}}</td>
-            <td>{{data.humidity}}</td>
-          </tr>
-          {% endfor %}
-          {% endfor%}
+              <tr>
+                <th scope="row">No data to display, please add devices</th>
+                </tr>
           {% endif %}
-        </tbody>
-      </table>
-    </div>
+        {% endif %}
+      </tbody>
+    </table>
   </div>
-  <hr>
+</div>
+<hr>
 <div class="container-fluid">
 </div>
-
-
 {% endblock %}

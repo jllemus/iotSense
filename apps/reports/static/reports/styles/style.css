@@ -160,7 +160,7 @@ a {
 }
 div.content {
     margin-left: 250px;
-    padding: 50px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     height: 100%;
     overflow-x: scroll;
     overflow: hidden;
@@ -199,4 +199,30 @@ div.content {
     color: white;
     font-size: 13px;
     padding: 0px 3px 0 3px;
+}
+.breadcrumb{
+    background-color: white !important;
+    color: gray;
+    padding: 0;
+    margin-bottom: 10px; 
+}
+
+.breadcrumb a{
+    text-decoration: none;
+    color: grey;
+}
+.breadcrumb-item{
+    height: 100%;
+    transition: all 200ms;
+    padding: 10px;
+}
+
+
+.breadcrumb-item:not(.breadcrumb-item-active):hover{
+    box-shadow: 0px 2px 3px grey;
+    cursor: pointer;
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
+    border-radius: 5px;
 }

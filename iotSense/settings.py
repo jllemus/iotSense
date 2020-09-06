@@ -141,3 +141,5 @@ LOGOUT_REDIRECT_URL = "accounts:user_login"
 ## This redirects to user_login template after using 
 ## @login_required
 LOGIN_URL = "accounts:user_login"
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

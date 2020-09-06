@@ -73,7 +73,7 @@ class DataDecodification:
         self.data = data
 
     def data_decode(self):
-        '''Checks which type of device is sendind data'''
+        '''Checks which type of device is sending data'''
         try:
             device_name = self.data['device_name']
             if device_name == 'Sense' or device_name == 'Beacon':

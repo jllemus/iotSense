@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Companies{% endblock %}
+
+
+{% block breadcrumb %}
+<nav aria-label="nav">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"> <a href="{% url 'reports:dashboard' %}">Home</a></li>
+    <li class="breadcrumb-item breadcrumb-item-active">Devices</li>
+  </ol>
+</nav>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row">
-        {% if devices %}
+        {% if devices_dict %}
             {% for device, data in devices_dict.items %}
             <div class="col-md-5 col-sm-6 col-xs-12">
                 <div class="card">
