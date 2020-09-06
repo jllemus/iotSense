@@ -4,30 +4,47 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        {% for device in devices %}
+        {% if devices %}
+            {% for device, data in devices_dict.items %}
             <div class="col-md-5 col-sm-6 col-xs-12">
                 <div class="card">
                     <div class="card-header">
-                        {{device.device_id}} | {{device.device_name}}
+                        <b>{{data.0.device_id}}</b>  {{device}}
                     </div>
                     <div class="card-body">
                         <div class="container">
                             <div class="row">
+                                <div class="info">
+                                    Last comunication:
+                                    {% if data.1.0.timestamp %}
+                                    {{data.1.0.timestamp}}
+                                    {% else %}
+                                    {{'No last comunication'}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row justify-content-md-center">
                                 <button type="button" class="btn btn-view"><i class="fas fa-angle-double-right"></i>
                                     View</button>
                                 {% if user.is_authenticated %}
-                                    <button type="button" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</button>
-                                    <form action="{% url 'reports:edit_device' action='delete' id=device.id %}" method="POST">
-                                        {%csrf_token%}
-                                        <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i>
-                                            Delete</button>
+                                <button type="button" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</button>
+                                <form action="{% url 'reports:edit_device' action='delete' id=data.0.id %}" method="POST">
+                                    {%csrf_token%}
+                                    <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i>
+                                        Delete</button>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <div class="col-md-12">
+                <h1>No devices to show. Please, ask the administrator to add devices</h1>
+            </div>
+        {% endif%}
     </div>
 </div>
 {% if user.is_superuser %}

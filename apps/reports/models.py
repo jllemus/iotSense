@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -44,7 +44,7 @@ class DeviceInfo(models.Model):
     temperature = models.CharField(max_length=200, default='', blank=True, null=True)
     humidity = models.CharField(max_length=200, default='', blank=True, null=True)
     state = models.CharField(max_length=200, default='', blank=True, null=True)
-    timestamp = models.DateTimeField(default=datetime.datetime.now)
+    timestamp = models.DateTimeField(default=timezone.now)
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
 
 

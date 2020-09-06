@@ -91,8 +91,6 @@ class DataDecodification:
             decoded_data["device_id"] = Device.objects.get(
                 device_id=data['device_id'])
             decoded_data["device_state"] = data['state']
-            decoded_data["temperature"] = 'N/A'
-            decoded_data["humidity"] = 'N/A'
             device_info = DeviceInfo(state=decoded_data['device_state'], timestamp=datetime.datetime.now(
             ), device=decoded_data['device_id'])
         elif device_name == 'Sense':
@@ -102,7 +100,6 @@ class DataDecodification:
                 device_id=data['device_id'])
             decoded_data["temperature"] = data['temperature']
             decoded_data["humidity"] = data['humidity']
-            decoded_data["device_state"] = 'N/A'
             device_info = DeviceInfo(humidity=decoded_data['humidity'], temperature=decoded_data['temperature'],
                                      timestamp=datetime.datetime.now(), device=decoded_data['device_id'])
         return device_info

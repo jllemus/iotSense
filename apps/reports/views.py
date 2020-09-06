@@ -9,6 +9,7 @@ from .forms import AddDeviceForm
 
 # Create your views here.
 
+
 def index(request):
     return render(request, 'reports/index.html')
 
@@ -17,13 +18,19 @@ def index(request):
 def dashboard(request):
     user = request.user
     devices, devices_info = validation_superuser(user)
-    return render(request, 'reports/dashboard.html', {'devices': devices, 'device_number': devices.count(), 'devices_info': devices_info.order_by('-timestamp')})
+    try:
+        devices_info = devices_info.order_by('-timestamp')
+    except:
+        devices_info = devices_info
+
+    return render(request, 'reports/dashboard.html', {'devices': devices, 'device_number': devices.count(), 'devices_info': devices_info})
 
 
 @method_decorator(login_required, name='get')
 # @method_decorator(user_passes_test(lambda u: u.is_superuser), name='get')
 class Companies(TemplateView):
     template_name = "reports/companies.html"
+
     def get(self, request):
         try:
             company_data = {}
@@ -46,10 +53,16 @@ class Devices(TemplateView):
     template_name = 'reports/devices.html'
 
     def get(self, request):
+        devices_dict = {}
         user = request.user
         devices, _ = validation_superuser(user)
-        devices_info = DeviceInfo.objects.filter()
-        return render(request, self.template_name, {'devices': devices})
+        try:
+            for device in devices:
+                device_info = DeviceInfo.objects.filter(device=device).order_by('-timestamp')
+                devices_dict[device.device_name] = [device, device_info]
+        except:
+            devices_dict = {}
+        return render(request, self.template_name, {'devices_dict': devices_dict})
 
     def post(self, request, action, id):
         delete(Device, action, id)
@@ -65,7 +78,6 @@ class AddDevices(TemplateView):
         user = request.user
         if user.is_superuser:
             form = AddDeviceForm()
-            print(form)
             return render(request, self.template_name, {'form': form})
         else:
             raise 404
